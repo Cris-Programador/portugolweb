@@ -6,6 +6,7 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
@@ -187,6 +188,18 @@ public class WebJSInterface {
         {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    @JavascriptInterface
+    public void openWebsite(String link) {
+        try {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+            context.startActivity(browserIntent);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }

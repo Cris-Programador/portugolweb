@@ -366,6 +366,17 @@ import Hotbar from "./pages/index/hotbar.js";
 		_cursorToEnd(textarea);
 	}
 
+	export function abrirPagina(url) {
+		if(typeof Android !== 'undefined')
+		{
+			Android.openWebsite(url); //eslint-disable-line
+		}
+		else
+		{
+			window.open(url, "_blank");
+		}
+	}
+
 	/**
 	 * PARA FUNCIONAR COM O ANDROID PRECISA DESSAS FUNÇÕES NO OBJETO WINDOW.
 	 * É O JEITO DE INTEGRAR
