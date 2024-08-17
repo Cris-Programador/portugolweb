@@ -239,21 +239,6 @@ public class VersionChecker {
 
         try {
             //String respVersion = "A";
-
-            if(resposta.has("web_app_version") && resposta.has("web_app_files")) {
-                int web_app_version = resposta.getInt("web_app_version");
-                if(web_app_version > versaoWeb)
-                {
-                    Log.d("VERSIONCHECKER","Detectado nova versão do webapp, Baixando...");
-                    WebAppUpdater updater = new WebAppUpdater(Inicio.getIndex(),resposta.getJSONArray("web_app_files"),versaoWeb,web_app_version,context);
-                    updater.executar();
-                }
-                else
-                {
-                    Log.d("VERSIONCHECKER","WebApp Já está atualizado! Versão, atual:"+versaoWeb+", encontrada:"+web_app_version);
-                }
-            }
-
             String respVersion = resposta.getString("version");
             //if(!respVersion.equals(versaoApp))
 
@@ -267,7 +252,22 @@ public class VersionChecker {
             }
             else
             {
-                Log.d("VersionChecker", "App já está na última versão, atual:"+versaoApp+", encontrada:"+respVersion);
+                Log.d("VERSIONCHECKER", "App já está na última versão, atual:"+versaoApp+", encontrada:"+respVersion);
+
+                // SÓ VAI TENTAR ATUALIZAR WEB APP SE ESTIVER NA ÚLTIMA VERSÃO DO APP
+                if(resposta.has("web_app_version") && resposta.has("web_app_files")) {
+                    int web_app_version = resposta.getInt("web_app_version");
+                    if(web_app_version > versaoWeb)
+                    {
+                        Log.d("VERSIONCHECKER","Detectado nova versão do webapp, Baixando...");
+                        WebAppUpdater updater = new WebAppUpdater(Inicio.getIndex(),resposta.getJSONArray("web_app_files"),versaoWeb,web_app_version,context);
+                        updater.executar();
+                    }
+                    else
+                    {
+                        Log.d("VERSIONCHECKER","WebApp Já está atualizado! Versão, atual:"+versaoWeb+", encontrada:"+web_app_version);
+                    }
+                }
             }
             return true;
         } catch (Exception e) {
