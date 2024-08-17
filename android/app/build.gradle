@@ -11,8 +11,8 @@ android {
         applicationId "br.erickweil.portugolweb"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 9
-        versionName "1.7"
+        versionCode 10
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
